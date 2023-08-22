@@ -26,11 +26,7 @@ const Shirt = () => {
   const logoTexture = useTexture(snap.logoDecal);
   const fullTexture = useTexture(snap.fullDecal);
 
-  useFrame((state, delta) =>
-    // TODO: check why dampc is not working
-    // easing.dampC(material.color, new Color(snap.color), 0.25, delta)
-    material.color.set("#153d94")
-  );
+  useFrame(() => material.color.set(snap.color));
 
   const stateString = JSON.stringify(state);
 
