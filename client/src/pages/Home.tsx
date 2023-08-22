@@ -11,6 +11,7 @@ import {
 } from "../config/motion";
 
 import { CustomButton } from "../components";
+import { getContrastingColor } from "../config/helpers";
 
 const Home = () => {
   const snap = useSnapshot(state);
@@ -36,7 +37,10 @@ const Home = () => {
               className="flex flex-col gap-5"
               {...headContentAnimation}
             >
-              <p className="max-w-md font-normal">
+              <p
+                className="max-w-md font-normal"
+                style={{ color: getContrastingColor(snap.color) }}
+              >
                 Create your unique and exclusive shirt with our brand-new 3D
                 customization tool. <strong>unleash you imagination</strong> and
                 define your own style.

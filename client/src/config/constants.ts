@@ -1,7 +1,7 @@
 import { swatch, fileIcon, ai, logoShirt, stylishShirt } from "../assets";
 
 export interface TabType {
-  name: string
+  name: "colorpicker" | "filepicker" | "aipicker" | "stylishShirt" | "logoShirt";
   icon: string
 }
 
@@ -40,4 +40,13 @@ export const DecalTypes = {
     stateProperty: "fullDecal",
     filterTab: "stylishShirt",
   },
+} as {
+  logo: {
+      stateProperty: "logoDecal" | "fullDecal";
+      filterTab: "logoShirt" | "stylishShirt";
+  };
+  full: {
+      stateProperty: "logoDecal" | "fullDecal";
+      filterTab: "logoShirt" | "stylishShirt";
+  };
 };

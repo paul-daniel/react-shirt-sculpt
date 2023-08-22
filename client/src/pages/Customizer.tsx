@@ -22,30 +22,76 @@ import {
 const Customizer = () => {
   const snap = useSnapshot(state);
 
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState<File>();
 
   const [prompt, setPrompt] = useState("");
 
   const [generatingImg, setGeneratingImg] = useState(false);
 
-  const [activeEditorTag, setActiveEditorTag] = useState("");
-  const [activeFilterTag, setActiveFilterTag] = useState({
+  const [activeEditorTab, setActiveEditorTab] = useState("");
+  const [activeFilterTab, setActiveFilterTab] = useState({
     logoShirt: true,
-    stylishShirt: true,
+    stylishShirt: false,
   });
 
   // Show tab content depending on the showing tab
   const generateTabContent = () => {
-    switch (activeEditorTag) {
+    switch (activeEditorTab) {
       case "colorpicker":
         return <ColorPicker />;
       case "filepicker":
-        return <FilePicker />;
+        return <FilePicker file={file} setFile={setFile} readFile={readFile} />;
       case "aipicker":
         return <AIPicker />;
       default:
         return null;
     }
+  };
+
+  const handleDecals = (
+    type: "logo" | "full",
+    result: string | ArrayBuffer | null
+  ) => {
+    const decalType = DecalTypes[type];
+
+    if (typeof result === "string") {
+      state[decalType.stateProperty] = result;
+
+      if (!activeFilterTab[decalType.filterTab]) {
+        handleActiveFilterTab(decalType.filterTab);
+      }
+    }
+  };
+
+  const handleActiveFilterTab = (tabName: string) => {
+    switch (tabName) {
+      case "logoShirt":
+        state.isLogoTexture = !activeFilterTab[tabName];
+        break;
+      case "stylishShirt":
+        state.isLogoTexture = !activeFilterTab[tabName];
+        break;
+      default:
+        state.isLogoTexture = true;
+        state.isFullTexture = false;
+    }
+
+    // after setting the state, activeFilterTab is updated
+
+    setActiveFilterTab((prevState) => {
+      return {
+        ...prevState,
+        [tabName]: !prevState[tabName],
+      };
+    });
+  };
+
+  const readFile = (type: "logo" | "full") => {
+    if (!file) return;
+    reader(file).then((result) => {
+      handleDecals(type, result);
+      setActiveEditorTab("");
+    });
   };
 
   return (
@@ -64,7 +110,7 @@ const Customizer = () => {
                     key={tab.name}
                     tab={tab}
                     handleClick={() => {
-                      setActiveEditorTag(tab.name);
+                      setActiveEditorTab(tab.name);
                     }}
                   />
                 ))}
@@ -83,8 +129,8 @@ const Customizer = () => {
                 key={tab.name}
                 tab={tab}
                 isFilterTab
-                isActiveTab=""
-                handleClick={() => {}}
+                isActiveTab={activeFilterTab[tab.name]}
+                handleClick={() => handleActiveFilterTab(tab.name)}
               />
             ))}
           </motion.div>
