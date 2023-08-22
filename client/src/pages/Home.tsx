@@ -10,6 +10,8 @@ import {
   slideAnimation,
 } from "../config/motion";
 
+import { CustomButton } from "../components";
+
 const Home = () => {
   const snap = useSnapshot(state);
 
@@ -30,14 +32,22 @@ const Home = () => {
                 LET'S <br className="xl:block hidden" /> DO IT
               </h1>
             </motion.div>
-            <motion.div {...headContentAnimation}>
+            <motion.div
+              className="flex flex-col gap-5"
+              {...headContentAnimation}
+            >
               <p className="max-w-md font-normal text-gray-600">
                 Create your unique and exclusive shirt with our brand-new 3D
                 customization tool. <strong>unleash you imagination</strong> and
                 define your own style.
               </p>
 
-              <CustomButtom />
+              <CustomButton
+                type="filled"
+                title="Customize It"
+                handleClick={() => (state.intro = false)}
+                customStyles="w-fit px-4 py-2.5 font-bold text-small"
+              />
             </motion.div>
           </motion.div>
         </motion.section>
