@@ -4,12 +4,14 @@ import { useSnapshot } from "valtio";
 import { useFrame } from "@react-three/fiber";
 import { Decal, useGLTF, useTexture } from "@react-three/drei";
 
-import state from "../store";
 import { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { MeshStandardMaterial, Color } from "three";
+
+import state from "../store";
 
 type GLTFResult = GLTF & {
   nodes: {
-    T_Shirt_male: THREE.Mesh;
+    [x: string]: THREE.Mesh;
   };
   materials: {
     lambert1: THREE.MeshStandardMaterial;
@@ -18,19 +20,47 @@ type GLTFResult = GLTF & {
 
 const Shirt = () => {
   const snap = useSnapshot(state);
-  const { nodes, materials } = useGLTF("/shirt_baked.glb") as GLTFResult;
+  const { nodes } = useGLTF("/shirt_baked.glb") as GLTFResult;
+  const material = new MeshStandardMaterial({ color: snap.color });
 
   const logoTexture = useTexture(snap.logoDecal);
   const fullTexture = useTexture(snap.fullDecal);
+
+  useFrame((state, delta) =>
+    // TODO: check why dampc is not working
+    // easing.dampC(material.color, new Color(snap.color), 0.25, delta)
+    material.color.set("#153d94")
+  );
+
+  const stateString = JSON.stringify(state);
+
   return (
-    <group>
+    <group key={stateString}>
       <mesh
         castShadow
         geometry={nodes.T_Shirt_male.geometry}
-        material={materials.lambert1}
+        material={material}
         material-roughness={1}
         dispose={null}
-      ></mesh>
+      >
+        {snap.isFullTexture && (
+          <Decal
+            position={[0, 0, 0]}
+            rotation={[0, 0, 0]}
+            scale={1}
+            map={fullTexture}
+          />
+        )}
+
+        {snap.isLogoTexture && (
+          <Decal
+            position={[0, 0.04, 0.15]}
+            rotation={[0, 0, 0]}
+            scale={0.15}
+            map={logoTexture}
+          />
+        )}
+      </mesh>
     </group>
   );
 };
