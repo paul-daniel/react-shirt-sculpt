@@ -52,6 +52,12 @@ const Home = () => {
                 handleClick={() => (state.intro = false)}
                 customStyles="w-fit px-4 py-2.5 font-bold text-small"
               />
+              <p
+                className="max-w-md font-normal"
+                style={{ color: getContrastingColor(snap.color) }}
+              >
+                <i>Better used on desktop devices*</i>
+              </p>
             </motion.div>
           </motion.div>
         </motion.section>
