@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "backend:build": "tsc && node dist/index.js",
+    "backend:build": "tsc",
     "start" : "node dist/index.js",
     "backend:development": "nodemon index.ts"
   },
