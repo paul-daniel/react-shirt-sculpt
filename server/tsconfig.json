@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es5",                            // Target ECMAScript version
+    "module": "commonjs",                       // Module system
+    "lib": ["dom", "esnext"],                   // Library files to be included in the compilation
+    "sourceMap": true,                          // Generate source maps
+    "outDir": "./dist",                         // Output directory for compiled files
+    "strict": true,                             // Enable strict type-checking options
+    "moduleResolution": "node",                 // Module resolution strategy
+    "esModuleInterop": true,                    // Enable interoperability between CommonJS and ES Modules
+    "skipLibCheck": true,                       // Skip type checking of declaration files
+    "forceConsistentCasingInFileNames": true,   // Disallow inconsistent casing in file names
+    "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false
+  },
+  "include": [                              // Files to be included in the compilation
+    "./**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",                           // Folders to be excluded from the compilation
+  ]
+}

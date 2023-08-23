@@ -8,7 +8,7 @@ interface CustomButtonProps {
   type: Type;
   title: string;
   customStyles: string;
-  handleClick: () => void;
+  handleClick?: () => void;
 }
 
 const CustomButton = ({
@@ -25,8 +25,7 @@ const CustomButton = ({
         backgroundColor: snap.color,
         color: getContrastingColor(snap.color),
       };
-    }
-    if (type === "outline") {
+    } else if (type === "outline") {
       return {
         borderWidth: "1px",
         borderColor: snap.color,
