@@ -1,7 +1,7 @@
-import { swatch, fileIcon, ai, logoShirt, stylishShirt } from "../assets";
+import { swatch, fileIcon, ai, logoShirt, stylishShirt, download } from "../assets";
 
 export interface TabType {
-  name: "colorpicker" | "filepicker" | "aipicker" | "stylishShirt" | "logoShirt";
+  name: "colorpicker" | "filepicker" | "aipicker" | "stylishShirt" | "logoShirt" | "download";
   icon: string
 }
 
@@ -30,6 +30,11 @@ export const FilterTabs : TabType[] = [
     icon: stylishShirt,
   },
 ];
+
+export const DownloadTab : TabType = {
+  name : "download", 
+  icon : download
+}
 
 export const DecalTypes = {
   logo: {

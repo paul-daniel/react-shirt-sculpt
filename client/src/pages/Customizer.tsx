@@ -7,7 +7,12 @@ import state from "../store";
 import { download } from "../assets";
 
 import { downloadCanvasToImage, reader } from "../config/helpers";
-import { EditorTabs, FilterTabs, DecalTypes } from "../config/constants";
+import {
+  EditorTabs,
+  FilterTabs,
+  DecalTypes,
+  DownloadTab,
+} from "../config/constants";
 
 import { fadeAnimation, slideAnimation } from "../config/motion";
 
@@ -171,6 +176,12 @@ const Customizer = () => {
                 handleClick={() => handleActiveFilterTab(tab.name)}
               />
             ))}
+            <Tab
+              key={DownloadTab.name}
+              tab={DownloadTab}
+              isDownloadTab
+              handleClick={() => downloadCanvasToImage()}
+            />
           </motion.div>
 
           <motion.div

@@ -8,10 +8,17 @@ interface TabProps {
   tab: TabType;
   isFilterTab?: boolean;
   isActiveTab?: string;
+  isDownloadTab?: boolean;
   handleClick: () => void;
 }
 
-const Tab = ({ tab, handleClick, isFilterTab, isActiveTab }: TabProps) => {
+const Tab = ({
+  tab,
+  handleClick,
+  isFilterTab,
+  isActiveTab,
+  isDownloadTab,
+}: TabProps) => {
   const snap = useSnapshot(state);
 
   const activeStyles =
@@ -23,16 +30,22 @@ const Tab = ({ tab, handleClick, isFilterTab, isActiveTab }: TabProps) => {
     <div
       key={tab.name}
       className={`tab-btn ${
-        isFilterTab ? "rounded-full glassmorphism" : "rounded-4"
+        isFilterTab || isDownloadTab
+          ? "rounded-full glassmorphism"
+          : "rounded-4"
       }`}
       onClick={handleClick}
-      style={activeStyles}
+      style={
+        !isDownloadTab
+          ? activeStyles
+          : { backgroundColor: "transparent", opacity: 1 }
+      }
     >
       <img
         src={tab.icon}
         alt={tab.name}
         className={`${
-          isFilterTab ? "w-2/3 h-2/3" : "w-11/12 h-11/12"
+          isFilterTab || isDownloadTab ? "w-2/3 h-2/3" : "w-11/12 h-11/12"
         } ${"object-contain"}`}
       />
     </div>
