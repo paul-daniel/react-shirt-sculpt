@@ -1,10 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useSnapshot } from "valtio";
 
-import config from "../config/config";
 import state from "../store";
-import { download } from "../assets";
 
 import { downloadCanvasToImage, reader } from "../config/helpers";
 import {
@@ -14,7 +12,7 @@ import {
   DownloadTab,
 } from "../config/constants";
 
-import { fadeAnimation, slideAnimation } from "../config/motion";
+import { slideAnimation } from "../config/motion";
 
 import {
   Tab,
@@ -124,7 +122,9 @@ const Customizer = () => {
     setActiveFilterTab((prevState) => {
       return {
         ...prevState,
-        [tabName]: !prevState[tabName],
+        [tabName]: !prevState[
+          tabName as "logoShirt" | "stylishShirt"
+        ] as boolean,
       };
     });
   };
@@ -172,7 +172,9 @@ const Customizer = () => {
                 key={tab.name}
                 tab={tab}
                 isFilterTab
-                isActiveTab={activeFilterTab[tab.name]}
+                isActiveTab={
+                  activeFilterTab[tab.name as "logoShirt" | "stylishShirt"]
+                }
                 handleClick={() => handleActiveFilterTab(tab.name)}
               />
             ))}

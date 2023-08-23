@@ -5,14 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build-css": "npx tailwindcss -i ./src/index.css -o ./dist/main.css --watch",
-    "build": "tsc && build-css && vite build",
+    "dev-css": "npx tailwindcss -i ./src/index.css -o ./dist/main.css --watch",
+    "build-css": "npx tailwindcss -i ./src/index.css -o ./dist/main.css",
+    "build": "tsc && npm run build-css && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
     "@react-three/drei": "^9.58.5",
     "@react-three/fiber": "^8.12.0",
+    "@types/react-color": "^3.0.6",
     "framer-motion": "^10.16.1",
     "maath": "^0.7.0",
     "react": "^18.2.0",

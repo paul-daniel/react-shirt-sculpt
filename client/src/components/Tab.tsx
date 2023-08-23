@@ -1,4 +1,3 @@
-import React from "react";
 import { TabType } from "../config/constants";
 import { useSnapshot } from "valtio";
 
@@ -7,7 +6,7 @@ import state from "../store";
 interface TabProps {
   tab: TabType;
   isFilterTab?: boolean;
-  isActiveTab?: string;
+  isActiveTab?: boolean;
   isDownloadTab?: boolean;
   handleClick: () => void;
 }
