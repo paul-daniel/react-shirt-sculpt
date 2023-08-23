@@ -21,6 +21,7 @@ import {
   FilePicker,
   CustomButton,
 } from "../components";
+import config from "../config/config";
 
 const Customizer = () => {
   const snap = useSnapshot(state);
@@ -64,15 +65,20 @@ const Customizer = () => {
     try {
       setGeneratingImg(true);
 
-      const response = await fetch("http://localhost:8080/api/v1/dalle", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          prompt,
-        }),
-      });
+      const response = await fetch(
+        snap.mode === "prod"
+          ? config.development.backendUrl
+          : config.production.backendUrl,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            prompt,
+          }),
+        }
+      );
 
       const data = await response.json();
       if (data.photo) {
