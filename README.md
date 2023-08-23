@@ -6,6 +6,8 @@ Welcome to the 3D T-shirt Customizer, a state-of-the-art web application designe
 
 ## Features
 
+IMPORTANT : Generative AI can take some time(a few seconds to 20seconds sometimes) after you sent a prompt so be patient ^^.
+
 - **Real-time 3D Preview**: Utilize Three.js to visualize the t-shirt customization in real-time.
 - **Custom Color Palette**: Choose from a vast array of colors to personalize your t-shirt.
 - **Add Logo**: Embed your unique logo onto the t-shirt.
