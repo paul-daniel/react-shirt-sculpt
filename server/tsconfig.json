@@ -16,7 +16,4 @@
   "include": [                              // Files to be included in the compilation
     "./**/*.ts"
   ],
-  "exclude": [
-    "node_modules",                           // Folders to be excluded from the compilation
-  ]
 }
