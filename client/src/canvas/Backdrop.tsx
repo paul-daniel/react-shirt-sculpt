@@ -1,5 +1,28 @@
 import { useRef } from "react";
-import { AccumulativeContext, AccumulativeShadows, RandomizedLight } from "@react-three/drei";
+import { AccumulativeShadows, RandomizedLight } from "@react-three/drei";
+import { ReactThreeFiber } from "@react-three/fiber";
+
+type SoftShadowMaterialProps = {
+  map: THREE.Texture;
+  color?: ReactThreeFiber.Color;
+  alphaTest?: number;
+  blend?: number;
+};
+
+interface AccumulativeContext {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  lights: Map<any, any>;
+  temporal: boolean;
+  frames: number;
+  blend: number;
+  count: number;
+  getMesh: () => THREE.Mesh<
+    THREE.PlaneGeometry,
+    SoftShadowMaterialProps & THREE.ShaderMaterial
+  >;
+  reset: () => void;
+  update: (frames?: number) => void;
+}
 
 const Backdrop = () => {
   const shadows = useRef() as React.Ref<AccumulativeContext> | undefined;
