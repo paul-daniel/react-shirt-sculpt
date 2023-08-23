@@ -67,8 +67,8 @@ const Customizer = () => {
 
       const response = await fetch(
         snap.mode === "prod"
-          ? config.development.backendUrl
-          : config.production.backendUrl,
+          ? config.production.backendUrl
+          : config.development.backendUrl,
         {
           method: "POST",
           headers: {
